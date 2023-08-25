@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene) //ref to window
         
-        let vc = PeopleViewController() //VC instance
+        let vc = CategoriesViewController() //VC instance
         
         //create UI navigation controlller
         let nav = UINavigationController(rootViewController: vc)

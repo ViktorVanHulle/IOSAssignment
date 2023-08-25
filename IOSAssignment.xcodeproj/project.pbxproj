@@ -9,19 +9,27 @@
 /* Begin PBXBuildFile section */
 		B2B101082A99078200B964EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101072A99078200B964EA /* AppDelegate.swift */; };
 		B2B1010A2A99078200B964EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101092A99078200B964EA /* SceneDelegate.swift */; };
-		B2B1010C2A99078200B964EA /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1010B2A99078200B964EA /* PeopleViewController.swift */; };
+		B2B1010C2A99078200B964EA /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1010B2A99078200B964EA /* CategoriesViewController.swift */; };
 		B2B101112A99078500B964EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B101102A99078500B964EA /* Assets.xcassets */; };
 		B2B101142A99078500B964EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B101122A99078500B964EA /* LaunchScreen.storyboard */; };
+		B2B1011C2A9938B400B964EA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1011B2A9938B400B964EA /* SettingsViewController.swift */; };
+		B2B1011E2A99397600B964EA /* DailyQuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1011D2A99397600B964EA /* DailyQuotesViewController.swift */; };
+		B2B101202A9939F000B964EA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1011F2A9939F000B964EA /* FavoritesViewController.swift */; };
+		B2B101222A993A3F00B964EA /* MyQuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101212A993A3F00B964EA /* MyQuotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B2B101042A99078200B964EA /* IOSAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B101072A99078200B964EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2B101092A99078200B964EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B2B1010B2A99078200B964EA /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		B2B1010B2A99078200B964EA /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B2B101102A99078500B964EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2B101132A99078500B964EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2B101152A99078500B964EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2B1011B2A9938B400B964EA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B2B1011D2A99397600B964EA /* DailyQuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuotesViewController.swift; sourceTree = "<group>"; };
+		B2B1011F2A9939F000B964EA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		B2B101212A993A3F00B964EA /* MyQuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +64,11 @@
 			children = (
 				B2B101072A99078200B964EA /* AppDelegate.swift */,
 				B2B101092A99078200B964EA /* SceneDelegate.swift */,
-				B2B1010B2A99078200B964EA /* PeopleViewController.swift */,
+				B2B1010B2A99078200B964EA /* CategoriesViewController.swift */,
+				B2B1011B2A9938B400B964EA /* SettingsViewController.swift */,
+				B2B1011D2A99397600B964EA /* DailyQuotesViewController.swift */,
+				B2B1011F2A9939F000B964EA /* FavoritesViewController.swift */,
+				B2B101212A993A3F00B964EA /* MyQuotesViewController.swift */,
 				B2B101102A99078500B964EA /* Assets.xcassets */,
 				B2B101122A99078500B964EA /* LaunchScreen.storyboard */,
 				B2B101152A99078500B964EA /* Info.plist */,
@@ -134,9 +146,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B1010C2A99078200B964EA /* PeopleViewController.swift in Sources */,
+				B2B1010C2A99078200B964EA /* CategoriesViewController.swift in Sources */,
+				B2B1011E2A99397600B964EA /* DailyQuotesViewController.swift in Sources */,
 				B2B101082A99078200B964EA /* AppDelegate.swift in Sources */,
+				B2B101222A993A3F00B964EA /* MyQuotesViewController.swift in Sources */,
 				B2B1010A2A99078200B964EA /* SceneDelegate.swift in Sources */,
+				B2B101202A9939F000B964EA /* FavoritesViewController.swift in Sources */,
+				B2B1011C2A9938B400B964EA /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
