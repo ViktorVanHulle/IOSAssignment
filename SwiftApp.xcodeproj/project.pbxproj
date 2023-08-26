@@ -14,6 +14,9 @@
 		B2B101392A994EC200B964EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B101382A994EC200B964EA /* Assets.xcassets */; };
 		B2B1013C2A994EC200B964EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B1013A2A994EC200B964EA /* LaunchScreen.storyboard */; };
 		B2B101442A9958D600B964EA /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101432A9958D600B964EA /* Quotes.swift */; };
+		B2B101482A999F8300B964EA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101472A999F8300B964EA /* FavoritesViewController.swift */; };
+		B2B1014A2A999FB200B964EA /* MakeQuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */; };
+		B2B1014C2A9A5CA500B964EA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		B2B1013B2A994EC200B964EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2B1013D2A994EC200B964EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B101432A9958D600B964EA /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
+		B2B101472A999F8300B964EA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeQuotesViewController.swift; sourceTree = "<group>"; };
+		B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 				B2B1012F2A994EBF00B964EA /* AppDelegate.swift */,
 				B2B101312A994EBF00B964EA /* SceneDelegate.swift */,
 				B2B101332A994EBF00B964EA /* ViewController.swift */,
+				B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */,
+				B2B101472A999F8300B964EA /* FavoritesViewController.swift */,
+				B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */,
 				B2B101352A994EBF00B964EA /* Main.storyboard */,
 				B2B101382A994EC200B964EA /* Assets.xcassets */,
 				B2B1013A2A994EC200B964EA /* LaunchScreen.storyboard */,
@@ -142,8 +151,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2B101442A9958D600B964EA /* Quotes.swift in Sources */,
+				B2B1014A2A999FB200B964EA /* MakeQuotesViewController.swift in Sources */,
+				B2B1014C2A9A5CA500B964EA /* SettingsViewController.swift in Sources */,
 				B2B101342A994EBF00B964EA /* ViewController.swift in Sources */,
 				B2B101302A994EBF00B964EA /* AppDelegate.swift in Sources */,
+				B2B101482A999F8300B964EA /* FavoritesViewController.swift in Sources */,
 				B2B101322A994EBF00B964EA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,21 +11,10 @@ class ViewController: UIViewController {
     
     
     let api = Api()
+    var dailyPushQuote = ""
+    var dailyPushQuoteAuthor = ""
+
     var currentCategory: String = "happiness" // Default category
-    var categories = [
-        "age", "alone", "amazing", "anger", "architecture", "art", "attitude", "beauty",
-        "best", "birthday", "business", "car", "change", "communications", "computers", "cool",
-        "courage", "dad", "dating", "death", "design", "dreams", "education", "environmental",
-        "equality", "experience", "failure", "faith", "family", "famous", "fear", "fitness",
-        "food", "forgiveness", "freedom", "friendship", "funny", "future", "god", "good",
-        "government", "graduation", "great", "happiness", "health", "history", "home", "hope",
-        "humor", "imagination", "inspirational", "intelligence", "jealousy", "knowledge",
-        "leadership", "learning", "legal", "life", "love", "marriage", "medical", "men",
-        "mom", "money", "morning", "movies", "success"
-    ]
-    
-    var pickerView = UIPickerView()
-    
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var categoryTextField: UITextField!
@@ -33,26 +22,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        configSelector()
+        makeRandomPushQuote()
         updateQuote()
-        
     }
-    
-    func configSelector(){
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        categoryTextField.inputView = pickerView
-        
-    }
-    
-    @IBAction func changeCategoryButton(_ sender: UIButton) {
-        if let newCategory = categoryTextField.text {
-            currentCategory = newCategory
-            updateQuote()
-        }
-    }
-    
-    
+
     func updateQuote() {
         api.loadData(for: currentCategory) { [weak self] quotes in
             guard let self = self, let randomQuote = quotes.randomElement() else {
@@ -65,26 +38,76 @@ class ViewController: UIViewController {
             }
         }
     }
-}
-
-//From "Easiest UIPickerView with UITextfield Xcode 11 Swift 5" tutorial
-extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    func numberOfComponents(in  pickerView: UIPickerView) -> Int {
-        return 1
+    //push notification from "Hoz to add Local push notifications to your IOS app with swift" tutorial
+    func checkForPermission(){
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings{ settings in
+            switch settings.authorizationStatus{
+            case .authorized:
+                self.dispatchNotification()
+            case .denied:
+                return
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]){
+                    didAllow, error in
+                    if didAllow {
+                        self.dispatchNotification()
+                    }
+                }
+            default:
+                return
+        }
+        }
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component : Int) -> Int {
-        return categories.count
+    func makeRandomPushQuote() {
+        
+        api.loadData(for: currentCategory) { [weak self] quotes in
+            guard let self = self, let randomQuote = quotes.randomElement() else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.dailyPushQuote = randomQuote.quote
+                self.dailyPushQuoteAuthor = randomQuote.author
+            }
+            
+            checkForPermission()
+        }
+        
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categories[row]
-    }
+    func dispatchNotification(){
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryTextField.text = categories[row]
-        categoryTextField.resignFirstResponder()
+        //notification config
+        //identifier  for different notifications
+        let  identifier = "quote-notification-one"
+        let title = dailyPushQuoteAuthor
+        //define hour of day
+        let hour = 17
+        let minute = 12
+        let isDaily  = true
+        
+        let  notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = dailyPushQuote
+        content.sound = .default
+        
+        let calendar = Calendar.current
+        var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        //removes pending request of identifier when date is changed
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+        notificationCenter.add(request)
+        
     }
     
 }
