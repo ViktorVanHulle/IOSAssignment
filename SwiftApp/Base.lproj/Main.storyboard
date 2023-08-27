@@ -202,6 +202,7 @@
                     <navigationItem key="navigationItem" id="S4p-S6-L6x"/>
                     <connections>
                         <outlet property="categoryTextField" destination="hUh-zE-M2V" id="QFb-c5-fbi"/>
+                        <outlet property="datepicker" destination="mGi-09-PWj" id="m3B-Kt-ULS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUB-fm-Mid" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

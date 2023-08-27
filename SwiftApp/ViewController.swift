@@ -85,8 +85,8 @@ class ViewController: UIViewController {
         let  identifier = "quote-notification-one"
         let title = dailyPushQuoteAuthor
         //define hour of day
-        let hour = 17
-        let minute = 12
+        let hour = 12
+        let minute = 00
         let isDaily  = true
         
         let  notificationCenter = UNUserNotificationCenter.current()
