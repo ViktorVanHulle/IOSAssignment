@@ -11,6 +11,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var datepicker: UIDatePicker!
     
+    
+    let api = Api()
     var currentCategory: String = "happiness" // Default category
     var categories = [
         "age", "alone", "amazing", "anger", "architecture", "art", "attitude", "beauty",
@@ -23,6 +25,9 @@ class SettingsViewController: UIViewController {
         "leadership", "learning", "legal", "life", "love", "marriage", "medical", "men",
         "mom", "money", "morning", "movies", "success"
     ]
+    
+    var dailyPushQuote = ""
+    var dailyPushQuoteAuthor = ""
     
     @IBOutlet weak var categoryTextField: UITextField!
     
@@ -43,9 +48,27 @@ class SettingsViewController: UIViewController {
         
     }
     
+    func makeRandomCategoryPushQuote() {
+        
+        api.loadData(for: currentCategory) { [weak self] quotes in
+            guard let self = self, let randomQuote = quotes.randomElement() else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.dailyPushQuote = randomQuote.quote
+                self.dailyPushQuoteAuthor = randomQuote.author
+            }
+
+        }
+        
+    }
+    
+    
     @IBAction func changeCategoryButton(_ sender: UIButton) {
         if let newCategory = categoryTextField.text {
-           currentCategory = newCategory
+            currentCategory = newCategory
+            makeRandomCategoryPushQuote()
         }
         configSelectedTime()
 
@@ -72,21 +95,36 @@ class SettingsViewController: UIViewController {
         dateComponents.minute = minute
         let  isDaily = true
         
+        if(dailyPushQuote != ""){
+            let content = UNMutableNotificationContent()
+            content.title = dailyPushQuoteAuthor
+            content.body = dailyPushQuote
+            content.sound = .default
+    
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            
+            //removes pending request of identifier when date is changed
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+            notificationCenter.add(request)
+            
+        }else{
+            //get current notification and change it
+            notificationCenter.getPendingNotificationRequests(completionHandler: {requests -> () in
+                for request in requests {
+                    if(request.identifier == identifier){
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+                        let request = UNNotificationRequest(identifier: identifier, content: request.content, trigger: trigger)
+                        
+                        //removes pending request of identifier when date is changed
+                        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+                        notificationCenter.add(request)
+          
+                    }
+                        
+                }})
+        }
 
-        //get current notification and change it
-        notificationCenter.getPendingNotificationRequests(completionHandler: {requests -> () in
-            for request in requests {
-                if(request.identifier == identifier){
-                    
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
-                    let request = UNNotificationRequest(identifier: identifier, content: request.content, trigger: trigger)
-                    
-                    //removes pending request of identifier when date is changed
-                    notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-                    notificationCenter.add(request)
-                }
-                    
-            }})
         
 
             

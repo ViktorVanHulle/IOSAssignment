@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     var dailyPushQuote = ""
     var dailyPushQuoteAuthor = ""
 
-    var currentCategory: String = "happiness" // Default category
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var categoryTextField: UITextField!
@@ -27,7 +26,7 @@ class ViewController: UIViewController {
     }
 
     func updateQuote() {
-        api.loadData(for: currentCategory) { [weak self] quotes in
+        api.loadData(for: "") { [weak self] quotes in
             guard let self = self, let randomQuote = quotes.randomElement() else {
                 return
             }
@@ -63,7 +62,7 @@ class ViewController: UIViewController {
     
     func makeRandomPushQuote() {
         
-        api.loadData(for: currentCategory) { [weak self] quotes in
+        api.loadData(for: "") { [weak self] quotes in
             guard let self = self, let randomQuote = quotes.randomElement() else {
                 return
             }
