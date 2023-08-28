@@ -9,12 +9,29 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    private lazy var favoritesLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Favorites"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
-    
+
+    private func setupUI() {
+        view.backgroundColor = .white
+        
+        view.addSubview(favoritesLabel)
+        
+        NSLayoutConstraint.activate([
+            favoritesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            favoritesLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 
     /*
     // MARK: - Navigation

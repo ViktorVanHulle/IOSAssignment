@@ -9,11 +9,8 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    @IBOutlet weak var datepicker: UIDatePicker!
-    
-    
     let api = Api()
-    var currentCategory: String = "happiness" // Default category
+    var currentCategory: String = "" // Default category
     var categories = [
         "age", "alone", "amazing", "anger", "architecture", "art", "attitude", "beauty",
         "best", "birthday", "business", "car", "change", "communications", "computers", "cool",
@@ -29,17 +26,144 @@ class SettingsViewController: UIViewController {
     var dailyPushQuote = ""
     var dailyPushQuoteAuthor = ""
     
-    @IBOutlet weak var categoryTextField: UITextField!
-    
     var pickerView = UIPickerView()
 
-
+    private lazy var categoryTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Enter category"
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Settings"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        return label
+    }()
+    
+    private lazy var categoryTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Category"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        return label
+    }()
+    
+    private lazy var categoryDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Enter a category for your daily quote"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        return label
+    }()
+    
+    private lazy var dateTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Select Time"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        return label
+    }()
+    
+    private lazy var dateDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Choose the time for your daily quote notification"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        return label
+    }()
+    
+    
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.datePickerMode = .time
+        return datePicker
+    }()
+    
+    private lazy var applyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Apply", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(didTapApply), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         configSelector()
-        // Do any additional setup after loading the view.
     }
 
+    private func setupUI() {
+        //background
+        view.backgroundColor = .white
+        
+        //components
+        view.addSubview(titleLabel)
+        view.addSubview(categoryTitleLabel)
+        view.addSubview(categoryTextField)
+        view.addSubview(categoryDescriptionLabel)
+        view.addSubview(dateTitleLabel)
+        view.addSubview(datePicker)
+        view.addSubview(dateDescriptionLabel)
+        view.addSubview(applyButton)
+        
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            categoryTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            categoryTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            categoryTextField.topAnchor.constraint(equalTo: categoryTitleLabel.bottomAnchor, constant: 8),
+            categoryTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            categoryTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            categoryDescriptionLabel.topAnchor.constraint(equalTo: categoryTextField.bottomAnchor, constant: 2),
+            categoryDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            dateTitleLabel.topAnchor.constraint(equalTo: categoryDescriptionLabel.bottomAnchor, constant: 20),
+            dateTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            datePicker.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 8),
+            datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            dateDescriptionLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 2),
+            dateDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            applyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            applyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            applyButton.widthAnchor.constraint(equalToConstant: 200),
+            applyButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+
+    @objc func didTapApply(sender: UIButton) {
+        let selectedDate = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        let formattedTime = dateFormatter.string(from: selectedDate)
+        
+        if let category = categoryTextField.text {
+            currentCategory = category
+            makeRandomCategoryPushQuote()
+        }
+        configSelectedTime()
+            
+    }
     
     func configSelector(){
         pickerView.delegate = self
@@ -65,21 +189,11 @@ class SettingsViewController: UIViewController {
     }
     
     
-    @IBAction func changeCategoryButton(_ sender: UIButton) {
-        if let newCategory = categoryTextField.text {
-            currentCategory = newCategory
-            makeRandomCategoryPushQuote()
-        }
-        configSelectedTime()
-
-    }
-    
-    
     func configSelectedTime(){
         
         //datepicker values
-        datepicker.datePickerMode = .time
-        let date = datepicker.date
+        datePicker.datePickerMode = .time
+        let date = datePicker.date
         let components  = Calendar.current.dateComponents([.hour, .minute], from: date)
         let hour = components.hour!
         let minute = components.minute!

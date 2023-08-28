@@ -15,6 +15,24 @@ struct Quote: Codable, Identifiable {
     
 }
 
+#if DEBUG
+extension Quote {
+    static  var sampleData = [
+        Quote(
+            quote: "No amount of money ever  bought  a second of time",
+            author:  "Tony Stark",
+            category: "time"
+        ),
+        Quote(
+            quote: "All we have to do is decide what to do with  the time that is given to us",
+            author:  "Gandalf",
+            category: "time"
+        ),
+        
+    ]
+}
+#endif
+
 class Api : ObservableObject{
     @Published var quotes = [Quote]()
     func loadData(for category: String, completion: @escaping ([Quote]) -> ()) {
