@@ -92,7 +92,29 @@ extension MyQuotesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteQuoteCell.identifier, for: indexPath) as! FavoriteQuoteCell
         let quote = myQuotes[indexPath.row]
         cell.configure(with: quote)
+        cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let quote = myQuotes[indexPath.row]
+        let text = "\(quote.quote)\n- \(quote.author)"
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17) // Adjust font size as needed
+        label.text = text
+        let size = label.sizeThatFits(CGSize(width: tableView.bounds.width - 32, height: CGFloat.greatestFiniteMagnitude))
+        return size.height + 32 // Adjust padding as needed
     }
 }
 
+
+
+extension MyQuotesViewController: FavoriteQuoteCellDelegate {
+    func favoriteButtonTapped(for quote: Quote) {
+        print("HELLO CUNT")
+        FavoritesManager.shared.addQuoteToFavorites(quote) // Add the quote to favorites
+        tableView.reloadData()
+        print(FavoritesManager.shared.favoriteQuotes.count)
+    }
+}

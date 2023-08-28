@@ -21,7 +21,7 @@ class MakeQuotesViewController: UIViewController {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Category:"
+        label.text = "Category"
         return label
     }()
     
@@ -36,7 +36,7 @@ class MakeQuotesViewController: UIViewController {
     private let quoteLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Quote:"
+        label.text = "Quote"
         return label
     }()
     
@@ -44,6 +44,21 @@ class MakeQuotesViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter quote"
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    
+    private let authorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Author"
+        return label
+    }()
+    
+    private let authorTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Enter author"
         textField.borderStyle = .roundedRect
         return textField
     }()
@@ -76,6 +91,8 @@ class MakeQuotesViewController: UIViewController {
         view.addSubview(categoryTextField)
         view.addSubview(quoteLabel)
         view.addSubview(quoteTextField)
+        view.addSubview(authorLabel)
+        view.addSubview(authorTextField)
         view.addSubview(addButton)
         
         NSLayoutConstraint.activate([
@@ -96,6 +113,13 @@ class MakeQuotesViewController: UIViewController {
             quoteTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             quoteTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
+            authorLabel.topAnchor.constraint(equalTo: quoteTextField.bottomAnchor, constant: 16),
+            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            authorTextField.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 8),
+            authorTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            authorTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
             addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             addButton.widthAnchor.constraint(equalToConstant: 200),
@@ -107,13 +131,14 @@ class MakeQuotesViewController: UIViewController {
         // Check if both category and quote text fields are non-empty
         guard let category = categoryTextField.text,
               let quoteText = quoteTextField.text,
-              !category.isEmpty, !quoteText.isEmpty else {
+              let authorText = authorTextField.text,
+              !category.isEmpty, !quoteText.isEmpty, !authorText.isEmpty else {
             // Show an alert or message indicating that both fields are required
             return
         }
         
         // Create a new Quote object
-        let newQuote = Quote(quote: quoteText, author: "Your Name", category: category)
+        let newQuote = Quote(quote: quoteText, author: authorText, category: category)
         
         // Add the new quote to your list of quotes
         QuoteDataManager.shared.addQuote(newQuote)
