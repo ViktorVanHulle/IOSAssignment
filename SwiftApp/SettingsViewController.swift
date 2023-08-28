@@ -92,7 +92,8 @@ class SettingsViewController: UIViewController {
         button.setTitle("Apply", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        //bg color
+        button.backgroundColor = UIColor(hex: "#FF6B6B")
         button.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(didTapApply), for: .touchUpInside)
         return button
