@@ -67,7 +67,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITZ-9n-hWR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="746"/>
+            <point key="canvasLocation" x="1822" y="772"/>
+        </scene>
+        <!--My Quotes View Controller-->
+        <scene sceneID="WCW-dY-FAl">
+            <objects>
+                <viewController id="Jtg-VH-gad" customClass="MyQuotesViewController" customModule="SwiftApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1w1-Tv-IGc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="I2z-xn-phd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I9p-I7-4i7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2740" y="783"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="x25-mq-pm2">

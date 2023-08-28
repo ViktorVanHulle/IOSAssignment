@@ -12,6 +12,8 @@ class QuoteDataManager {
     
     private let quoteKey = "SavedQuote"
     
+    var myQuotes: [Quote] = [Quote(quote: "test", author: "me'", category: "your mom")]
+    
     var savedQuote: Quote? {
         get {
             if let savedQuoteData = UserDefaults.standard.data(forKey: quoteKey) {
@@ -27,6 +29,19 @@ class QuoteDataManager {
             if let encodedQuote = try? encoder.encode(newValue) {
                 UserDefaults.standard.set(encodedQuote, forKey: quoteKey)
             }
+        }
+    }
+    
+    func addQuote(_ quote: Quote) {
+         myQuotes.append(quote)
+         saveQuotes()
+     }
+    
+    func saveQuotes(){
+        //with UserDefaults storage mechanism
+        let encoder = JSONEncoder()
+        if let encodedData = try? encoder.encode(myQuotes) {
+            UserDefaults.standard.set(encodedData, forKey: "MyQuotesKey")
         }
     }
 }

@@ -145,7 +145,7 @@ class ViewController: BackgroundViewController {
                 let favoritesVC = FavoritesViewController()
                 navigationController?.pushViewController(favoritesVC, animated: true)
             case "My Quotes":
-                let myQuotesVC = MakeQuotesViewController()
+                let myQuotesVC = MyQuotesViewController()
                 navigationController?.pushViewController(myQuotesVC, animated: true)
             default:
                 break
