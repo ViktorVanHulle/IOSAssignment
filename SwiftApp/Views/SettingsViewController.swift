@@ -103,6 +103,11 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configSelector()
+        
+        //set the category to the saved category
+        if let savedQuote = QuoteDataManager.shared.savedQuote {
+            categoryTextField.text = savedQuote.category
+        }
     }
 
     private func setupUI() {
@@ -153,14 +158,6 @@ class SettingsViewController: UIViewController {
     
 
     @objc func didTapApply(sender: UIButton) {
-        
-        configSelectedTime()
-        
-        let selectedDate = datePicker.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .short
-        let formattedTime = dateFormatter.string(from: selectedDate)
-
         currentCategory = categoryTextField.text!
         makeRandomCategoryPushQuote()
     }
@@ -169,7 +166,6 @@ class SettingsViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         categoryTextField.inputView = pickerView
-        
     }
     
     func makeRandomCategoryPushQuote() {
@@ -183,13 +179,19 @@ class SettingsViewController: UIViewController {
                 self.dailyPushQuote = randomQuote.quote
                 self.dailyPushQuoteAuthor = randomQuote.author
                 QuoteDataManager.shared.savedQuote = Quote(quote: randomQuote.quote, author: randomQuote.author, category: randomQuote.category)
+                
+                // Setup notification only after fetching and setting the correct data
+                self.setupNotification()
             }
-
         }
-        
     }
     
-    func configSelectedTime(){
+    func setupNotification(){
+        
+        let selectedDate = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        let formattedTime = dateFormatter.string(from: selectedDate)
         
         //datepicker values
         datePicker.datePickerMode = .time
@@ -197,57 +199,42 @@ class SettingsViewController: UIViewController {
         let components  = Calendar.current.dateComponents([.hour, .minute], from: date)
         let hour = components.hour!
         let minute = components.minute!
-
+        
         //notification config
+        //identifier  for different notifications
         let  identifier = "quote-notification-one"
+        let title = dailyPushQuoteAuthor
+        let isDaily  = true
         
         let  notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = self.dailyPushQuote
+        content.sound = .default
+        
+        
+        print("should be the sdame: \(dailyPushQuote)--")
         
         let calendar = Calendar.current
         var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
         dateComponents.hour = hour
         dateComponents.minute = minute
-        let  isDaily = true
         
-       // if(dailyPushQuote != ""){
-          //  let content = UNMutableNotificationContent()
-          //  content.title = dailyPushQuoteAuthor
-          //  content.body = dailyPushQuote
-          //  content.sound = .default
-    
-          //  let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
-          //  let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            
-            //removes pending request of identifier when date is changed
-         //   notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-          //  notificationCenter.add(request)
-            
-        //}else{
-         // get current notification and change it
-            notificationCenter.getPendingNotificationRequests(completionHandler: {requests -> () in
-                for request in requests {
-                    if(request.identifier == identifier){
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
-                        let request = UNNotificationRequest(identifier: identifier, content: request.content, trigger: trigger)
-                        
-                        //removes pending request of identifier when date is changed
-                        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-                        notificationCenter.add(request)
-          
-                    }
-                        
-                }})
-       // }
-
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
-
-            
+        //removes pending request of identifier when date is changed
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+        notificationCenter.add(request)
+        
         }
     
     
-        
-    }
-        
+    
+    
+}
+
   
     /*
     // MARK: - Navigation
