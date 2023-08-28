@@ -112,9 +112,12 @@ extension MyQuotesViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension MyQuotesViewController: FavoriteQuoteCellDelegate {
     func favoriteButtonTapped(for quote: Quote) {
-        print("HELLO CUNT")
-        FavoritesManager.shared.addQuoteToFavorites(quote) // Add the quote to favorites
-        tableView.reloadData()
-        print(FavoritesManager.shared.favoriteQuotes.count)
+        if let index = FavoritesManager.shared.favoriteQuotes.firstIndex(where: { $0.quote == quote.quote}) {
+            FavoritesManager.shared.removeQuoteFromFavorites(FavoritesManager.shared.favoriteQuotes[index])
+            tableView.reloadData()
+        }else {
+            FavoritesManager.shared.addQuoteToFavorites(quote) // Add the quote to favorites
+            tableView.reloadData()
+        }
     }
 }

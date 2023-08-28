@@ -150,9 +150,6 @@ class MakeQuotesViewController: UIViewController {
         navigationController?.pushViewController(myQuotesVC, animated: true)
         
     }
-    
-    
-    
 
     /*
     // MARK: - Navigation
