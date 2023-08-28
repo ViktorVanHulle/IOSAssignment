@@ -18,6 +18,9 @@
 		B2B1014C2A9A5CA500B964EA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */; };
 		B2B101532A9BDDE500B964EA /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101522A9BDDE500B964EA /* Database.swift */; };
 		B2B1015A2A9CB55C00B964EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B101592A9CB55C00B964EA /* Main.storyboard */; };
+		B2B1015C2A9CC97F00B964EA /* DailyQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1015B2A9CC97F00B964EA /* DailyQuoteViewController.swift */; };
+		B2B101612A9CCB0600B964EA /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101602A9CCB0600B964EA /* BackgroundViewController.swift */; };
+		B2B101632A9CD3FD00B964EA /* QuoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101622A9CD3FD00B964EA /* QuoteDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2B101522A9BDDE500B964EA /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		B2B101592A9CB55C00B964EA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B2B1015B2A9CC97F00B964EA /* DailyQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuoteViewController.swift; sourceTree = "<group>"; };
+		B2B101602A9CCB0600B964EA /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
+		B2B101622A9CD3FD00B964EA /* QuoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,15 +72,12 @@
 		B2B1012E2A994EBF00B964EA /* SwiftApp */ = {
 			isa = PBXGroup;
 			children = (
-				B2B101562A9CA01100B964EA /* assets */,
+				B2B101622A9CD3FD00B964EA /* QuoteDataManager.swift */,
 				B2B101522A9BDDE500B964EA /* Database.swift */,
-				B2B1014D2A9BBA6100B964EA /* Models */,
 				B2B1012F2A994EBF00B964EA /* AppDelegate.swift */,
 				B2B101312A994EBF00B964EA /* SceneDelegate.swift */,
-				B2B101332A994EBF00B964EA /* ViewController.swift */,
-				B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */,
-				B2B101472A999F8300B964EA /* FavoritesViewController.swift */,
-				B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */,
+				B2B1014D2A9BBA6100B964EA /* Models */,
+				B2B1015D2A9CC99E00B964EA /* Views */,
 				B2B101382A994EC200B964EA /* Assets.xcassets */,
 				B2B101592A9CB55C00B964EA /* Main.storyboard */,
 				B2B1013A2A994EC200B964EA /* LaunchScreen.storyboard */,
@@ -91,11 +94,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B2B101562A9CA01100B964EA /* assets */ = {
+		B2B1015D2A9CC99E00B964EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B2B101602A9CCB0600B964EA /* BackgroundViewController.swift */,
+				B2B101332A994EBF00B964EA /* ViewController.swift */,
+				B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */,
+				B2B101472A999F8300B964EA /* FavoritesViewController.swift */,
+				B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */,
+				B2B1015B2A9CC97F00B964EA /* DailyQuoteViewController.swift */,
 			);
-			path = assets;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,9 +181,12 @@
 				B2B101442A9958D600B964EA /* Quotes.swift in Sources */,
 				B2B1014A2A999FB200B964EA /* MakeQuotesViewController.swift in Sources */,
 				B2B1014C2A9A5CA500B964EA /* SettingsViewController.swift in Sources */,
+				B2B1015C2A9CC97F00B964EA /* DailyQuoteViewController.swift in Sources */,
 				B2B101342A994EBF00B964EA /* ViewController.swift in Sources */,
 				B2B101302A994EBF00B964EA /* AppDelegate.swift in Sources */,
 				B2B101482A999F8300B964EA /* FavoritesViewController.swift in Sources */,
+				B2B101612A9CCB0600B964EA /* BackgroundViewController.swift in Sources */,
+				B2B101632A9CD3FD00B964EA /* QuoteDataManager.swift in Sources */,
 				B2B101532A9BDDE500B964EA /* Database.swift in Sources */,
 				B2B101322A994EBF00B964EA /* SceneDelegate.swift in Sources */,
 			);

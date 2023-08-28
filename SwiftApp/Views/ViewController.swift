@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BackgroundViewController {
     
     
     let api = Api()
@@ -23,14 +23,6 @@ class ViewController: UIViewController {
         makeRandomPushQuote()
         updateQuote()
     }
-    
-    private func addGradientBackground() {
-         let gradientLayer = CAGradientLayer()
-         gradientLayer.colors = [UIColor(hex: "#FFEDE1").cgColor, UIColor(hex: "#D7F9FF").cgColor]
-         gradientLayer.locations = [0.0, 1.0] // Customize your gradient locations
-         gradientLayer.frame = view.bounds
-         view.layer.insertSublayer(gradientLayer, at: 0)
-     }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -102,10 +94,6 @@ class ViewController: UIViewController {
     
     private func setupUI() {
         
-        //background
-        addOvalGradientLayers()
-        addGradientBackground()
-        
         
         //components
         view.addSubview(titleLabel)
@@ -141,32 +129,7 @@ class ViewController: UIViewController {
             categoryStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
-    
-    private func addOvalGradientLayers() {
-        let numberOfOvals = 5
 
-        for i in 0..<numberOfOvals {
-            let ovalLayer = createOvalGradientLayer(index: i, totalOvals: numberOfOvals)
-            view.layer.insertSublayer(ovalLayer, at: 0)
-        }
-    }
-
-    private func createOvalGradientLayer(index: Int, totalOvals: Int) -> CALayer {
-        let ovalLayer = CAGradientLayer()
-        //ovalLayer.colors = [UIColor.blue.cgColor, UIColor.white.cgColor] // Custom gradient colors
-        ovalLayer.colors = [UIColor(hex: "#FFEDE1").cgColor, UIColor.white.cgColor] // Custom gradient colors
-        ovalLayer.locations = [0.0, 1.0] // Custom gradient locations
-
-        let ovalWidth = view.bounds.width * 0.5
-        let ovalHeight = view.bounds.height * 0.5
-        let ovalX = -ovalWidth / 2.0 + CGFloat(index) * view.bounds.width / CGFloat(totalOvals - 1)
-        let ovalY = -ovalHeight / 2.0 + view.bounds.height * CGFloat(index) / CGFloat(totalOvals - 1)
-
-        ovalLayer.frame = CGRect(x: ovalX, y: ovalY, width: ovalWidth, height: ovalHeight)
-        ovalLayer.cornerRadius = ovalHeight / 2.0 // oval shape
-
-        return ovalLayer
-    }
 
     @objc func didTapCategory(sender: UIButton) {
         if let title = sender.currentTitle {
@@ -176,8 +139,8 @@ class ViewController: UIViewController {
                  let settingsVC = SettingsViewController()
                  navigationController?.pushViewController(settingsVC, animated: true)
             case "Daily Quotes":
-                print("Daily Quote")
-                //navigationController?.pushViewController(dailyQuotesVC, animated: true)
+                let dailyQuotesVC = DailyQuoteViewController()
+                navigationController?.pushViewController(dailyQuotesVC, animated: true)
             case "Favorites":
                 let favoritesVC = FavoritesViewController()
                 navigationController?.pushViewController(favoritesVC, animated: true)
@@ -274,20 +237,4 @@ class ViewController: UIViewController {
         
     }
     
-}
-
-// UIColor extension to create colors from hex values
-extension UIColor {
-    convenience init(hex: String) {
-        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-        
-        var rgb: UInt64 = 0
-        Scanner(string: hexSanitized).scanHexInt64(&rgb)
-        
-        self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
-                  green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
-                  blue: CGFloat(rgb & 0x0000FF) / 255.0,
-                  alpha: 1.0)
-    }
 }

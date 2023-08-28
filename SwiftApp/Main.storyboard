@@ -54,10 +54,10 @@
             </objects>
             <point key="canvasLocation" x="878" y="772"/>
         </scene>
-        <!--View Controller-->
+        <!--Daily Quote View Controller-->
         <scene sceneID="74e-3i-E2m">
             <objects>
-                <viewController id="59h-qU-fpn" sceneMemberID="viewController">
+                <viewController id="59h-qU-fpn" customClass="DailyQuoteViewController" customModule="SwiftApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KL8-p8-p6D">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

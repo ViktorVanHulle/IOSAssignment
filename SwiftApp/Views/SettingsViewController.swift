@@ -153,17 +153,16 @@ class SettingsViewController: UIViewController {
     
 
     @objc func didTapApply(sender: UIButton) {
+        
+        configSelectedTime()
+        
         let selectedDate = datePicker.date
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         let formattedTime = dateFormatter.string(from: selectedDate)
-        
-        if let category = categoryTextField.text {
-            currentCategory = category
-            makeRandomCategoryPushQuote()
-        }
-        configSelectedTime()
-            
+
+        currentCategory = categoryTextField.text!
+        makeRandomCategoryPushQuote()
     }
     
     func configSelector(){
@@ -183,12 +182,12 @@ class SettingsViewController: UIViewController {
             DispatchQueue.main.async {
                 self.dailyPushQuote = randomQuote.quote
                 self.dailyPushQuoteAuthor = randomQuote.author
+                QuoteDataManager.shared.savedQuote = Quote(quote: randomQuote.quote, author: randomQuote.author, category: randomQuote.category)
             }
 
         }
         
     }
-    
     
     func configSelectedTime(){
         
@@ -210,21 +209,21 @@ class SettingsViewController: UIViewController {
         dateComponents.minute = minute
         let  isDaily = true
         
-        if(dailyPushQuote != ""){
-            let content = UNMutableNotificationContent()
-            content.title = dailyPushQuoteAuthor
-            content.body = dailyPushQuote
-            content.sound = .default
+       // if(dailyPushQuote != ""){
+          //  let content = UNMutableNotificationContent()
+          //  content.title = dailyPushQuoteAuthor
+          //  content.body = dailyPushQuote
+          //  content.sound = .default
     
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+          //  let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+          //  let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
             //removes pending request of identifier when date is changed
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-            notificationCenter.add(request)
+         //   notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+          //  notificationCenter.add(request)
             
-        }else{
-            //get current notification and change it
+        //}else{
+         // get current notification and change it
             notificationCenter.getPendingNotificationRequests(completionHandler: {requests -> () in
                 for request in requests {
                     if(request.identifier == identifier){
@@ -238,7 +237,7 @@ class SettingsViewController: UIViewController {
                     }
                         
                 }})
-        }
+       // }
 
         
 
