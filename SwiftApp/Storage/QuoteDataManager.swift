@@ -51,4 +51,13 @@ class QuoteDataManager {
         quotes.append(quote)
         myQuotes = quotes
      }
+    
+    
+    func removeQuote(_ quote: Quote) {
+        var quotes = myQuotes
+        if let index = quotes.firstIndex(where: { $0.quote == quote.quote }) {
+            quotes.remove(at: index)
+            myQuotes = quotes
+        }
+    }
 }

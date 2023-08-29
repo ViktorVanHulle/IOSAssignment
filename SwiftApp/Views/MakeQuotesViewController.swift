@@ -8,7 +8,8 @@
 import UIKit
 
 class MakeQuotesViewController: UIViewController {
-
+    
+    var onQuoteAdded: (() -> Void)? // Closure to execute when a new quote is added
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -74,6 +75,7 @@ class MakeQuotesViewController: UIViewController {
         button.layer.cornerRadius = 12
     
         button.addTarget(self, action: #selector(addQuoteButtonTapped), for: .touchUpInside)
+        
         return button
     }()
 
@@ -143,11 +145,11 @@ class MakeQuotesViewController: UIViewController {
         // Add the new quote to your list of quotes
         QuoteDataManager.shared.addQuote(newQuote)
         
-        let myQuotesVC = MyQuotesViewController()
-        // Notify the delegate that a new quote was added
-        myQuotesVC.delegate?.didAddNewQuote()
+        // Call the closure to notify the MyQuotesViewController
+        onQuoteAdded?()
+
         
-        navigationController?.pushViewController(myQuotesVC, animated: true)
+        navigationController?.popViewController(animated: true) // Navigate back
         
     }
 

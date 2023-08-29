@@ -11,7 +11,7 @@ protocol MyQuotesViewControllerDelegate: AnyObject {
     func didAddNewQuote()
 }
 
-class MyQuotesViewController: BackgroundViewController {
+class MyQuotesViewController: BackgroundViewController, MyQuotesCellDelegate {
     
     //to reload tableview on addquote
     weak var delegate: MyQuotesViewControllerDelegate?
@@ -19,7 +19,7 @@ class MyQuotesViewController: BackgroundViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(FavoriteQuoteCell.self, forCellReuseIdentifier: FavoriteQuoteCell.identifier)
+        tableView.register(MyQuotesCell.self, forCellReuseIdentifier: MyQuotesCell.identifier)
         return tableView
     }()
     
@@ -67,6 +67,11 @@ class MyQuotesViewController: BackgroundViewController {
     @objc private func addQuoteButtonTapped() {
         // Handle adding a new quote here
         let makeQuoteVC = MakeQuotesViewController()
+        
+        makeQuoteVC.onQuoteAdded = { [weak self] in
+             self?.tableView.reloadData()
+         }
+        
         navigationController?.pushViewController(makeQuoteVC, animated: true)
     }
 
@@ -89,7 +94,7 @@ extension MyQuotesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteQuoteCell.identifier, for: indexPath) as! FavoriteQuoteCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyQuotesCell.identifier, for: indexPath) as! MyQuotesCell
         let quote = myQuotes[indexPath.row]
         cell.configure(with: quote)
         cell.delegate = self
@@ -111,6 +116,11 @@ extension MyQuotesViewController: UITableViewDataSource, UITableViewDelegate {
 
 
 extension MyQuotesViewController: FavoriteQuoteCellDelegate {
+    func deleteButtonTapped(for quote: Quote) {
+        QuoteDataManager.shared.removeQuote(quote)
+        tableView.reloadData()
+    }
+    
     func favoriteButtonTapped(for quote: Quote) {
         if let index = FavoritesManager.shared.favoriteQuotes.firstIndex(where: { $0.quote == quote.quote}) {
             FavoritesManager.shared.removeQuoteFromFavorites(FavoritesManager.shared.favoriteQuotes[index])

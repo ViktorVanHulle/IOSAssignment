@@ -28,8 +28,7 @@ class FavoritesManager {
     }
     
     func addQuoteToFavorites(_ quote: Quote) {
-        print("favorite!!!!!")
-        print("quote: \(quote.quote), \(quote.author)")
+        print("favorite quote: \(quote.quote), \(quote.author)")
         if !favoriteQuotes.contains(where: {$0.quote == quote.quote}) {
             var favorites = favoriteQuotes
             favorites.append(quote)

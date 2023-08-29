@@ -86,6 +86,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension FavoritesViewController: FavoriteQuoteCellDelegate {
+
     func favoriteButtonTapped(for quote: Quote) {
         if let index = favoriteQuotes.firstIndex(where: { $0.quote == quote.quote}) {
             FavoritesManager.shared.removeQuoteFromFavorites(favoriteQuotes[index])

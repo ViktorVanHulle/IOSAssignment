@@ -43,7 +43,6 @@ class Api : ObservableObject{
         request.setValue("ufhrScuFZN1Vlu+Pjo6GgA==cMXnFwIHyGap40Qq", forHTTPHeaderField: "X-Api-Key")
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             let quotes = try! JSONDecoder().decode([Quote].self, from: data!)
-            print(quotes)
             DispatchQueue.main.async {
                 completion(quotes)
             }

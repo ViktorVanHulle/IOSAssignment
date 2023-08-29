@@ -23,6 +23,7 @@
 		B2B101652A9D44D900B964EA /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101642A9D44D900B964EA /* FavoritesManager.swift */; };
 		B2B101692A9D4B8200B964EA /* FavoriteQuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B101682A9D4B8200B964EA /* FavoriteQuoteCell.swift */; };
 		B2B1016B2A9D579A00B964EA /* MyQuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1016A2A9D579A00B964EA /* MyQuotesViewController.swift */; };
+		B2B1016F2A9D712900B964EA /* MyQuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B1016E2A9D712900B964EA /* MyQuoteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		B2B101642A9D44D900B964EA /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		B2B101682A9D4B8200B964EA /* FavoriteQuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuoteCell.swift; sourceTree = "<group>"; };
 		B2B1016A2A9D579A00B964EA /* MyQuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuotesViewController.swift; sourceTree = "<group>"; };
+		B2B1016E2A9D712900B964EA /* MyQuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQuoteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +78,9 @@
 		B2B1012E2A994EBF00B964EA /* SwiftApp */ = {
 			isa = PBXGroup;
 			children = (
-				B2B101642A9D44D900B964EA /* FavoritesManager.swift */,
-				B2B101622A9CD3FD00B964EA /* QuoteDataManager.swift */,
 				B2B1012F2A994EBF00B964EA /* AppDelegate.swift */,
 				B2B101312A994EBF00B964EA /* SceneDelegate.swift */,
+				B2B1016C2A9D6CB200B964EA /* Storage */,
 				B2B1014D2A9BBA6100B964EA /* Models */,
 				B2B1015D2A9CC99E00B964EA /* Views */,
 				B2B101382A994EC200B964EA /* Assets.xcassets */,
@@ -101,16 +102,34 @@
 		B2B1015D2A9CC99E00B964EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B2B1016D2A9D6CD000B964EA /* Cells */,
 				B2B101602A9CCB0600B964EA /* BackgroundViewController.swift */,
 				B2B101332A994EBF00B964EA /* ViewController.swift */,
 				B2B101492A999FB200B964EA /* MakeQuotesViewController.swift */,
 				B2B101472A999F8300B964EA /* FavoritesViewController.swift */,
-				B2B101682A9D4B8200B964EA /* FavoriteQuoteCell.swift */,
 				B2B1014B2A9A5CA500B964EA /* SettingsViewController.swift */,
 				B2B1015B2A9CC97F00B964EA /* DailyQuoteViewController.swift */,
 				B2B1016A2A9D579A00B964EA /* MyQuotesViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B2B1016C2A9D6CB200B964EA /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				B2B101642A9D44D900B964EA /* FavoritesManager.swift */,
+				B2B101622A9CD3FD00B964EA /* QuoteDataManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		B2B1016D2A9D6CD000B964EA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B2B101682A9D4B8200B964EA /* FavoriteQuoteCell.swift */,
+				B2B1016E2A9D712900B964EA /* MyQuoteCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B1016F2A9D712900B964EA /* MyQuoteCell.swift in Sources */,
 				B2B101442A9958D600B964EA /* Quotes.swift in Sources */,
 				B2B1016B2A9D579A00B964EA /* MyQuotesViewController.swift in Sources */,
 				B2B1014A2A999FB200B964EA /* MakeQuotesViewController.swift in Sources */,

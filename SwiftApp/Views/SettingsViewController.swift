@@ -212,9 +212,7 @@ class SettingsViewController: UIViewController {
         content.title = title
         content.body = self.dailyPushQuote
         content.sound = .default
-        
-        
-        print("should be the sdame: \(dailyPushQuote)--")
+
         
         let calendar = Calendar.current
         var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
