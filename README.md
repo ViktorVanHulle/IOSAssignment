@@ -1,4 +1,5 @@
-# Quote Generator Swift (UIKit) Applicatie
+# Swift Quote Generator App with UIKit
+REST API: https://api-ninjas.com/api/quotes
 ## views with their distinct functionalities
 - home view:
 Navigating to different screens + random quote on display
